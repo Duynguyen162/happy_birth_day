@@ -1,0 +1,255 @@
+:root {
+    /* SANG TRỌNG & HIỆN ĐẠI */
+    --bg: linear-gradient(180deg, #FFC4C4, #f6dcdc 100%);
+    --card: #ffffff;
+    --text: #A63A50; 
+    --accent: #C35A6F; 
+
+    /* Cập nhật biến font */
+    --font-display: 'Pacifico', cursive;      /* Font nghệ thuật */
+    --font-body: 'Quicksand', sans-serif;  /* Font chữ thường */
+
+    /* Giữ các biến khác như cũ: */
+    --fade-duration: 1000ms;
+    --visible-duration: 2500ms;
+    --easing: cubic-bezier(0.2, 0.9, 0.28, 1);
+}
+
+/* ===== CÀI ĐẶT CHUNG ===== */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    background: var(--bg);
+    background-attachment: fixed; /* Giữ nền cố định khi cuộn */
+    font-family: var(--font-body); /* Áp dụng font Quicksand cho toàn trang */
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== BỐ CỤC CHÍNH ===== */
+.container {
+    position: relative;
+    z-index: 1;
+    min-height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 5vh;
+    box-sizing: border-box;
+    padding-bottom: 5vh;
+}
+.wrap {
+    width: 100%;
+    max-width: 1400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 24px;
+    box-sizing: border-box;
+}
+.card {
+    width: 100%;
+    max-width: 900px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 40px 36px;
+    box-shadow: 5px 10px 15px rgba(156, 118, 118, 0.6);
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ===== FONT CHỮ & HIỆU ỨNG TEXT ===== */
+.phrase-wrap {
+    height: 88px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+.phrase {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 38px;
+    line-height: 1.1;
+    max-width: 100%;
+    text-wrap: balance;
+    padding: 0 10px;
+    white-space: pre-wrap;
+    transform: translateY(8px) scale(0.995);
+    opacity: 0;
+    transition: opacity var(--fade-duration) var(--easing),
+        transform var(--fade-duration) var(--easing);
+    will-change: opacity, transform;
+    color: var(--text);
+}
+.phrase.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* ===== CÁC KHỐI NỘI DUNG ĐỘNG ===== */
+.hidden {
+    display: none; /* Dùng display none để ẩn hoàn toàn và không chiếm diện tích */
+}
+.fade-in {
+    display: flex; /* Hoặc 'block' tùy vào element */
+    flex-direction: column;
+    align-items: center;
+    animation: fadeInAnimation 1s ease forwards;
+}
+@keyframes fadeInAnimation {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== KHỐI HIỂN THỊ GIF ===== */
+.gif-section {
+    margin-top: 40px;
+    gap: 20px;
+}
+.gif-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+.set-gif {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.curtain {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #A63A50; 
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: 10px;
+    box-sizing: border-box;
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    z-index: 2;
+}
+.curtain p {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.8rem;
+    line-height: 1.2;
+    margin: 0;
+}
+.curtain.removed {
+    opacity: 0;
+    transform: scale(1.1);
+    pointer-events: none;
+}
+
+/* ===== TIN NHẮN VUI ===== */
+.joke-message {
+    margin-top: 25px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    padding: 15px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    font-weight: 700;
+    color: var(--text);
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+/* ===== CÁC LOẠI NÚT BẤM ===== */
+.button-container {
+    margin-top: 30px;
+    width: 100%;
+    text-align: center;
+}
+/* Style chung cho các nút */
+.view-button, .next-page {
+    font-family: var(--font-body);
+    border-radius: 50px;
+    padding: 14px 40px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+    border: none;
+}
+.view-button:focus-visible, .next-page:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 4px;
+}
+/* Style riêng cho từng nút */
+.view-button {
+    background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+    color: #333;
+}
+.next-page {
+    background: linear-gradient(135deg, #ffd6ec, #c8e4ff);
+    color: #4a4a4a;
+}
+.view-button:hover, .next-page:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== HIỆU ỨNG NỀN ===== */
+.background-effects {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+.particle {
+    position: absolute;
+    bottom: -20px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    animation: rise 15s infinite ease-in;
+    opacity: 0;
+}
+.particle:nth-child(1) { width: 10px; height: 10px; left: 10%; animation-duration: 20s; }
+.particle:nth-child(2) { width: 15px; height: 15px; left: 20%; animation-duration: 12s; animation-delay: 2s; }
+.particle:nth-child(3) { width: 8px; height: 8px; left: 35%; animation-duration: 25s; animation-delay: 4s; }
+.particle:nth-child(4) { width: 12px; height: 12px; left: 50%; animation-duration: 18s; animation-delay: 1s; }
+.particle:nth-child(5) { width: 18px; height: 18px; left: 65%; animation-duration: 14s; animation-delay: 5s; }
+.particle:nth-child(6) { width: 7px; height: 7px; left: 80%; animation-duration: 22s; animation-delay: 3s; }
+.particle:nth-child(7) { width: 11px; height: 11px; left: 90%; animation-duration: 16s; animation-delay: 0.5s; }
+
+@keyframes rise {
+    0% { transform: translateY(0); opacity: 0.5; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+/* ===== RESPONSIVE & ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+    .phrase, .next-page, .view-button, .particle, .curtain {
+        transition: none !important;
+        transform: none !important;
+        animation: none !important;
+        opacity: 1 !important;
+    }
+}
+@media (max-width: 520px) {
+    .phrase { font-size: 28px; }
+    .card { padding: 28px; }
+    .phrase-wrap { height: 70px; }
+    .gif-container { width: 180px; height: 180px; }
+    .curtain p { font-size: 1.5rem; }
+}
